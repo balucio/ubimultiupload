@@ -11,9 +11,9 @@ Un problema di questo shield è che rende impossibile usare l'interfaccia USB di
 
 Per ovviare a questo problema ci sono due strade:
 
-# usare shield e arduino in modo indipendente (tutti gli switch a OFF): per far comunicare Arduino con lo shield è necessario ponticellare i pin RX e TX del connettore di debug dello shield, rispettivamente con i pin TX e RX di un'altra seriale fisica di arduino. Qualora l'arduino diponga di un asola interfaccia seriale fisica usare la libreria SoftSerial e usare dei Pin disponbili di arduino.
+Usare shield e arduino in modo indipendente (tutti gli switch a OFF): per far comunicare Arduino con lo shield è necessario ponticellare i pin RX e TX del connettore di debug dello shield, rispettivamente con i pin TX e RX di un'altra seriale fisica di arduino. Qualora l'arduino diponga di un asola interfaccia seriale fisica usare la libreria SoftSerial e usare dei Pin disponbili di arduino.
 
-# con gli swith 1 e 2 a ON dello shield: piegare i PIN0 e PIN1 dello shield in modo che non siano connessi ad Arduino. Ponticellare i PIN0 (TX) e PIN1 (RX) dello shield come nel caso precedente.
+Con gli swith 1 e 2 a ON dello shield: piegare i PIN0 e PIN1 dello shield in modo che non siano connessi ad Arduino. Ponticellare i PIN0 (TX) e PIN1 (RX) dello shield come nel caso precedente.
 
 Per quanto riguarda l'implementazione inizialmente si era pensato di usare il firwmare ESP-Link per connettersi ai servizi Cloud di Ubidots, tuttavia come da https://claus.bloggt.es/2017/02/26/arduino-esp8266-wifi-shield-elecshop-ml-by-wangtongze-comparison/ sembra che lo shield funzioni male con questo firmware.
 
