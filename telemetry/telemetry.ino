@@ -1,7 +1,10 @@
-// Sketch ESP con uso liberia UbidotsESP8266 per invio
-// dati sensori su cloud Ubidots.
-// I dati vengono collezionati dal logger (Arduino)
-// 2017 - Saul Bertuccio
+/* 
+ * Sketch ESP con uso liberia UbidotsESP8266 per invio
+ * dati sensori su cloud Ubidots.
+ * I dati vengono collezionati dal logger (Arduino)
+ * 2017 - Saul Bertuccio
+ * 
+ */
 
 #include <FS.h>                   //this needs to be first, or it all crashes and burns...
 #include <WiFiManager.h>          //https://github.com/tzapu/WiFiManager
@@ -13,12 +16,10 @@ extern "C" {
 }
 #endif
 
-#include "ConfigParams.h"
-#include "PortalParams.h"
-
 #define PORTAL_SSID "WifiSensorAP"
 #define PORTAL_PASS "administrator"
 #define SENSOR_NAME "arduino_sensor01"
+#define TOKEN "A1E-Ig8LF6prkagJFjbt2LGYV8EIYLqW7b"
 
 #define TRIGGER_PIN 0 // Pin che forza la modalità configurazione
 
@@ -84,48 +85,6 @@ float readVcc() {
   Serial.print(currentVcc / 1024.00f);
   Serial.println(" V");
   return currentVcc;
-}
-
-void sendData(const ConfigParams &cfg, Campione c) {
-
-  WiFiClient client;
-  int port = atoi(cfg.server_port);
-  if (!client.connect(cfg.server_ip, port )) {
-    Serial.println("Impossibile connettersi al server");
-    return;
-  }
-
-  String data = String("{\"operazione\": \"invio_dati\",");
-  data += String("\"sensore\":\"") + cfg.sensor_name + "\",";
-  data += String("\"valido\":\"") + ( c.valido ? "true" : "false" ) + "\",";
-  data += String("\"tensione\":\"") + c.vcc + "\",";
-  data += String("\"temperatura\":\"") + c.temperatura + "\",";
-  data += String("\"umidita\":\"") + c.umidita + "\",";
-  data += String("\"indice_calore\":\"") + c.indice_calore + "\"}";
-
-  Serial.print("Invio dati: ");
-  Serial.println(data);
-
-  // This will send the request to the server
-  client.print(data);
-  unsigned long timeout = millis();
-
-  while (client.available() == 0) {
-    if (millis() - timeout > 5000) {
-      Serial.println(">>> Nessuna risposta!");
-      client.stop();
-      return;
-    }
-  }
-
-  // Read all the lines of the reply from server and print them to Serial
-  while (client.available()) {
-    String line = client.readStringUntil('\r');
-    Serial.print(line);
-  }
-
-  Serial.println();
-  Serial.println("closing connection");
 }
 
 // Attiva la possibilità di leggere la tensione di alimentazione
