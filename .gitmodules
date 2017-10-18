@@ -1,3 +1,0 @@
-[submodule "ubidots-esp8266-serial"]
-	path = ubidots-esp8266-serial
-	url = https://github.com/ubidots/ubidots-esp8266-serial.git
