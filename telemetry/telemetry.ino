@@ -157,5 +157,5 @@ void loop() {
 
   Ubidots client(TOKEN);
   client.readData(); // Reads the command from the logger
-  delay(2000);
+  delay(5000);
 }
