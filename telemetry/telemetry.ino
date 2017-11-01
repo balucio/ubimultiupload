@@ -107,7 +107,7 @@ void setup() {
 
   if (!conn) {
     Serial.println("Collegamento fallito riavvio l'ESP...");
-    delay(3000);
+    delay(30000);
     ESP.restart();
   }
 }
@@ -116,5 +116,5 @@ void loop() {
 
   Ubidots client(TOKEN);
   client.readData(); // Reads the command from the logger
-  delay(5000);
+  delay(500);
 }
